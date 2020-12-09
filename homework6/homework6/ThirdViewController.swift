@@ -9,10 +9,27 @@ import UIKit
 
 class ThirdViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    enum Operator: String {
+        case sum = "+"
+        case subtraction = "-"
+        case divide = "/"
+        case multiply = "*"
+        
+        func compute(_ a: Double, _ b: Double, _ type: Operator) -> String {
+            
+            switch type {
+            case .sum:
+                return String(a + b)
+            case .subtraction:
+                return String(a - b)
+            case .divide:
+                if b == 0 {
+                    return "Деление на  ноль"
+                }else{return String(a / b)}
+            case .multiply:
+                return String(a * b)
+            }
+        }
     }
     
     @IBOutlet weak var firstOperand: UITextField!
@@ -36,22 +53,12 @@ class ThirdViewController: UIViewController {
         labelOne.text = "Введите корректные данные"
     }
     
-    @IBAction func compute(_ sender: Any) {
-        if let a = Int(firstOperand.text!){
-            if let b = Int(secondOperand.text!){
-                switch operatorField.text{
-                case "+":
-                    labelOne.text = "\(a+b)"
-                case "-":
-                    labelOne.text = "\(a-b)"
-                case "*":
-                    labelOne.text = "\(a*b)"
-                case "/":
-                    labelOne.text = "\(a/b)"
-                default:
-                    error()
-                }
-            }else{
+    @IBAction func compute() {
+        if let firstOperandText = firstOperand.text, let secondOperandText = secondOperand.text, let a = Double(firstOperandText), let b = Double(secondOperandText), let operatorText = operatorField.text{
+            
+            if let operatorInstance = Operator(rawValue: operatorText){
+                labelOne.text = operatorInstance.compute(a, b, operatorInstance)
+            } else{
                 error()
             }
         }else{
@@ -59,5 +66,5 @@ class ThirdViewController: UIViewController {
         }
     }
     
-    
+ 
 }

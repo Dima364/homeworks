@@ -9,19 +9,21 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
 // Создайте следующие проекты, в каждом из которых есть одно текстовое поле, кнопка и лейбл. При нажатии на кнопку в лейбл выводится:
 //        a. Текущее значение текстфилда и все предыдущие, для которых была нажата кнопка. Разделитель — пробел. Например, в поле ввели «Никита», нажали кнопку — в лейбл выведется «Никита». В поле ввели «Антон» и нажали на кнопку — в лейбл должно вывестись «Антон Никита» и так далее.
-    }
+    
    
     @IBOutlet weak var labelOne: UILabel!
     @IBOutlet weak var textFieldOne: UITextField!
     
-    @IBAction func buttonOneClick(_ sender: UIButton) {
-        if (textFieldOne.text != "") {
-        labelOne.text = labelOne.text == "Нажмите на кнопку" ? textFieldOne.text : labelOne.text! + " " + textFieldOne.text!
-        textFieldOne.text?.removeAll()
+    @IBAction func buttonOneClick() {
+        if let labelText = labelOne.text, let textFieldText = textFieldOne.text{
+            if (textFieldOne.text != "") {
+                labelOne.text = labelOne.text == "Нажмите на кнопку" ? textFieldOne.text : labelText + " " + textFieldText
+                    textFieldOne.text?.removeAll()
+            
+            }
+            
         }
         
     }

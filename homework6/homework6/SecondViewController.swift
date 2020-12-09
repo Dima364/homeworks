@@ -9,12 +9,6 @@ import UIKit
 
 class SecondViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-    
     @IBOutlet weak var labelOne: UILabel!
     
     @IBOutlet weak var textFieldOne: UITextField!
@@ -24,12 +18,18 @@ class SecondViewController: UIViewController {
     }
     */
 
-    @IBAction func buttonOne(_ sender: UIButton) {
-        if let i = Int(textFieldOne.text!){
-            labelOne.text = "\(Int(pow(2, Double(i))))"
+    @IBAction func buttonOne() {
+        
+        guard let unwrappedLabelOneText = textFieldOne.text else {
+            labelOne.text = "Вы не ввели число"
+            return
+        }
+        if let i = Int(unwrappedLabelOneText){
+            labelOne.text = "\(pow(2, Double(i)))"
         }else{
             labelOne.text = "Введите целое число в строку"
         }
+        
         textFieldOne.text?.removeAll()
     }
     
