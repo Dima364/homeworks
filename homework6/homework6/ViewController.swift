@@ -17,13 +17,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var textFieldOne: UITextField!
     
     @IBAction func buttonOneClick() {
-        if let labelText = labelOne.text, let textFieldText = textFieldOne.text{
-            if (textFieldOne.text != "") {
+        if let labelText = labelOne.text, let textFieldText = textFieldOne.text, !textFieldText.isEmpty {
                 labelOne.text = labelOne.text == "Нажмите на кнопку" ? textFieldOne.text : labelText + " " + textFieldText
+            
                     textFieldOne.text?.removeAll()
-            
-            }
-            
+        
         }
         
     }
